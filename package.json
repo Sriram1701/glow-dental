@@ -1,4 +1,8 @@
 {
+  "name": "glow-dental-clinic",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "cheerio": "^1.2.0",
     "jimp": "^1.6.1"

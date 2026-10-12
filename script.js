@@ -46,17 +46,56 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 3. View All Specialized Services Dropdown Toggle
-    const viewAllBtn = document.querySelector('.dropdown-trigger-btn');
-    const viewAllContent = document.querySelector('.dropdown-target-grid');
+    // 3. Desktop Services Dropdown Toggle
+    const desktopViewAllBtn = document.getElementById('services-dropdown-btn');
+    const dropdownContent = document.getElementById('services-dropdown-content');
 
-    if (viewAllBtn && viewAllContent) {
-        viewAllBtn.addEventListener('click', (e) => {
+    if (desktopViewAllBtn && dropdownContent) {
+        desktopViewAllBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            viewAllContent.classList.toggle('show-dropdown');
-            const icon = viewAllBtn.querySelector('i');
+            dropdownContent.classList.toggle('show-dropdown');
+            const icon = desktopViewAllBtn.querySelector('i');
             if (icon) {
-                icon.style.transform = viewAllContent.classList.contains('show-dropdown') ? 'rotate(180deg)' : 'rotate(0deg)';
+                icon.style.transform = dropdownContent.classList.contains('show-dropdown') ? 'rotate(180deg)' : 'rotate(0deg)';
+            }
+        });
+    }
+
+    // 3b. Mobile View All Services Toggle (Shows first 2 cards initially, expands all 16 on click)
+    const mobileServicesBtn = document.getElementById('mobile-services-btn');
+    const servicesGrid = document.querySelector('.services-grid');
+
+    if (mobileServicesBtn && servicesGrid) {
+        mobileServicesBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isCurrentlyExpanded = servicesGrid.classList.contains('show-all-mobile');
+
+            if (!isCurrentlyExpanded) {
+                // Expand all services
+                servicesGrid.classList.add('show-all-mobile');
+                if (dropdownContent) {
+                    dropdownContent.classList.add('mobile-expanded');
+                }
+                mobileServicesBtn.innerHTML = '<i class="fa-solid fa-eye-slash"></i> <span class="btn-text">Show Less Services</span> <i class="fa-solid fa-chevron-up arrow-icon"></i>';
+            } else {
+                // Collapse back to initial 2 cards
+                servicesGrid.classList.remove('show-all-mobile');
+                if (dropdownContent) {
+                    dropdownContent.classList.remove('mobile-expanded');
+                }
+                mobileServicesBtn.innerHTML = '<i class="fa-solid fa-layer-group"></i> <span class="btn-text">View All Services (16)</span> <i class="fa-solid fa-chevron-down arrow-icon"></i>';
+
+                // Smoothly scroll back to services section header
+                const servicesSection = document.getElementById('services-section');
+                if (servicesSection) {
+                    const headerOffset = 80;
+                    const elementPosition = servicesSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
     }
