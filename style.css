@@ -1927,21 +1927,55 @@ footer {
 
 /* --- NEW HERO SECTION (SAMPLE MATCH) --- */
 .hero-new {
+    position: relative;
     width: 100%;
     min-height: 90vh;
     display: flex;
     align-items: center;
     background-color: #faf5f0;
-    background-image: linear-gradient(to right, #faf5f0 40%, rgba(250, 245, 240, 0.8) 60%, transparent 100%), url('images/hero/dental.jpg');
-    background-size: cover;
-    background-position: center right;
-    background-repeat: no-repeat;
     padding: 0 100px;
     box-sizing: border-box;
     margin-top: 0;
+    overflow: hidden;
+}
+
+/* Ambient Clinic Video Background */
+.hero-video-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-video-element {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 80% center;
+}
+
+.hero-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        #faf5f0 0%,
+        rgba(250, 245, 240, 0.98) 36%,
+        rgba(250, 245, 240, 0.82) 55%,
+        rgba(250, 245, 240, 0.38) 78%,
+        rgba(250, 245, 240, 0.12) 100%
+    );
+    backdrop-filter: blur(1.5px);
 }
 
 .hero-content-new {
+    position: relative;
     max-width: 650px;
     padding: 40px 0;
     text-align: left;
@@ -2100,18 +2134,45 @@ footer {
 
 @media (max-width: 768px) {
     .hero-new {
+        position: relative;
         margin-top: 0;
         min-height: auto;
-        padding: 20px 16px 35px;
-        background-image: linear-gradient(to bottom, #faf5f0 60%, rgba(250, 245, 240, 0.95) 85%, transparent 100%), url('images/hero/dental.jpg');
-        background-position: center bottom;
+        padding: 22px 16px 36px;
         align-items: flex-start;
+        overflow: hidden;
+        background-color: #faf5f0;
+    }
+
+    .hero-video-element {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 25%;
+        opacity: 0.85;
+    }
+
+    .hero-video-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+            to bottom,
+            rgba(250, 245, 240, 0.96) 0%,
+            rgba(250, 245, 240, 0.92) 42%,
+            rgba(250, 245, 240, 0.85) 75%,
+            rgba(250, 245, 240, 0.92) 100%
+        );
+        backdrop-filter: blur(2px);
     }
 
     .hero-content-new {
+        position: relative;
         padding: 0;
         width: 100%;
         max-width: 100%;
+        z-index: 2;
     }
 
     .hero-super-badge {
